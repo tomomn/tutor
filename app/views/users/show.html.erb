@@ -1,0 +1,68 @@
+<div class="">
+  <h3>基本情報</h3>
+    <p>メールアドレス：<%= @email %></p>
+    <p>パスワード：xxxxxxxxx</p>
+    <%= link_to "基本情報を変更する", edit_user_registration_path, method: :get %><br><br><br>
+
+  <h3>登録情報</h3>
+    <h4>先生情報</h4><p><%= link_to "新規登録する", "/teachers/new", method: :get %></p>
+    <table>
+      <tr>
+        <td>ニックネーム</td>
+        <td>在住地</td>
+        <td>性別</td>
+        <td>大学</td>
+        <td>学部</td>
+        <td>学年</td>
+        <td>希望時給</td>
+        <td>指導可能科目（小）</td>
+        <td>指導可能科目（中）</td>
+        <td>指導可能科目（高）</td>
+      </tr>
+      <% @teachers.each do |teacher| %>
+      <tr>
+        <td><%= teacher.nickname %></td>
+        <td><%= teacher.prefecture.prefecture %><%= teacher.city %></td>
+        <td><%= teacher.gender.gender %></td>
+        <td><%= teacher.university %></td>
+        <td><%= teacher.department %></td>
+        <td><%= teacher.univ_year.univ_year %></td>
+        <td><%= teacher.fee %></td>
+        <td><%= teacher.subject_primary %></td>
+        <td><%= teacher.subject_junior %></td>
+        <td><%= teacher.subject_high %></td>
+        <td><%= link_to "編集する", "/teachers/#{teacher.id}/edit", method: :get %></td>
+        <td><%= link_to "削除する", "/teachers/#{teacher.id}", method: :delete, data: { confirm: '登録情報を削除します。よろしいですか？' } %></td>
+      </tr>
+      <% end %>
+    </table>
+
+
+    <h4>生徒情報</h4><%= link_to "新規登録する", "/students/new", method: :get %></p>
+    <table>
+      <tr>
+        <td>ニックネーム</td>
+        <td>在住地</td>
+        <td>生徒の性別</td>
+        <td>生徒の学年</td>
+        <td>希望時給</td>
+        <td>指導希望科目</td>
+      </tr>
+      <% @students.each do |student| %>
+      <tr>
+        <td><%= student.nickname %></td>
+        <td><%= student.prefecture.prefecture %><%= student.city %></td>
+        <td><%= student.gender.gender %></td>
+        <td><%= student.school_year.school_year %></td>
+        <td><%= student.fee %></td>
+        <td><%= student.subject %></td>
+        <td><%= link_to "編集する", "/students/#{student.id}/edit", method: :get %></td>
+        <td><%= link_to "削除する", "/students/#{student.id}", method: :delete, data: { confirm: '登録情報を削除します。よろしいですか？' } %></td>
+      </tr>
+      <% end %>
+    </table>
+
+</div>
+
+
+

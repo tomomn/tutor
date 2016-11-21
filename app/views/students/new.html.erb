@@ -1,0 +1,45 @@
+先生募集掲示板<br><br>
+
+先生募集の新規案件登録です。入力してね。<br><br>
+
+  <% if user_signed_in? %>
+  <% else %>
+    <p>新規案件登録をするにはログイン（会員登録）が必要です。</p>
+    <%= link_to "ログイン（会員登録）", new_user_session_path, method: :get %>
+  <% end %>
+  <br>
+  <br>
+
+<%= form_for @student do |f| %>
+  <table>
+    <tr><td>ニックネーム</td><td><%= f.text_field :nickname, placeholder: "例：T.Y、やまだ" %></td></tr>
+    <tr><td>在住都道府県</td><td><%= f.collection_select(:prefecture_id, @prefecture, :id, :prefecture, :prompt => "選択してください") %></td></tr>
+    <tr><td>在住市区町村</td><td><%= f.text_field :city, placeholder: "例：横浜市保土ヶ谷区" %></td></tr>
+    <tr><td>生徒の性別</td><td><%= f.collection_select(:gender_id, @gender, :id, :gender, :prompt => "選択してください") %></td></tr>
+    <tr><td>生徒の学年</td><td><%= f.collection_select(:school_year_id, @school_year, :id, :school_year, :prompt => "選択してください") %></td></tr>
+    <tr><td>希望時給</td><td><%= f.text_field :fee, placeholder: "例：2000円〜2500円" %></td></tr>
+    <tr><td>交通費</td><td><%= f.text_field :traffic_fee, placeholder: "例：実費お支払い致します" %></td></tr>
+    <tr><td>指導希望科目</td><td><%= f.text_field :subject, placeholder: "例：算数、国語、理科、社会" %></td></tr>
+    <tr><td>最寄路線及び駅</td><td><%= f.text_field :station, placeholder: "例：相鉄線　星川駅" %></td></tr>
+    <tr><td>最寄駅からの距離</td><td><%= f.text_field :station_distance, placeholder: "例：徒歩13分" %></td></tr>
+    <tr><td>その他通勤について</td><td><%= f.text_field :station_etc, placeholder: "例：駅前からバスで3分、バス停下車後、徒歩1分です" %></td></tr>
+    <tr><td>希望授業頻度</td><td><%= f.text_field :instruction_frequency, placeholder: "例：週1〜2回" %></td></tr>
+    <tr><td>希望授業時間/回</td><td><%= f.text_field :instruction_hour, placeholder: "例：2時間/回" %></td></tr>
+    <tr><td>授業可能な曜日、日時</td><td><%= f.text_field :instruction_week, placeholder: "例：月火水16時以降、木金18時以降、土日は都度ご相談" %></td></tr>
+    <tr><td>希望受講期間</td><td><%= f.text_field :instruction_term, placeholder: "例：中学校受験が終わるまで" %></td></tr>
+    <tr><td>生徒様の現状成績</td><td><%= f.text_area :purpose %></td></tr>
+    <tr><td>先生への要望など</td><td><%= f.text_area :request %></td></tr>
+  </table>
+<br><br>
+
+  <% if user_signed_in? && @student_count == 0 %>
+  <%= f.submit "登録" %>
+  <% elsif user_signed_in? && @student_count >= 1 %>
+    <p>既に登録済みの案件があります！案件登録できるには、1人1件までです。新規案件登録をする場合は、マイページより登録済み案件を削除してください。</p>
+  <% else %>
+    <p>新規案件登録をするにはログイン（会員登録）が必要です。</p>
+    <%= link_to "ログイン（会員登録）", new_user_session_path, method: :get %>
+  <% end %>
+<% end %>
+<br><br>
+

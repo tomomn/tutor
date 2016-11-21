@@ -1,0 +1,22 @@
+  <h2><%= @student.email %> 様</h2>
+  <hr />
+  <p>
+家庭教師の●●に掲載頂いておりました、先生募集に対して、先生候補の方からメッセージが届きました。<br>
+<br>
+<% @teacher.each do |teacher| %>
+  ▼先生のニックネーム<br>
+  <%= teacher.nickname %><br>
+  <br>
+  ▼先生の連絡先メールアドレス<br>
+  <%= teacher.user.email %>
+  <br>
+  もしこの先生候補の方にご興味がありましたら上記メールアドレス宛に、個別にご連絡をお取りください。<br>
+  <br>
+  <br>
+  ▼先生情報詳細<br>
+  <%= link_to "http://localhost:3000/teachers/#{teacher.id}/", "http://localhost:3000/teachers/#{teacher.id}/", method: :get %><br>
+<% end %>
+
+  </p>
+  <hr />
+

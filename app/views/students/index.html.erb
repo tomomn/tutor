@@ -1,0 +1,26 @@
+先生募集掲示板トップ。案件一覧表示
+
+    <h3>先生募集一覧</h3>
+    <table>
+      <tr>
+        <td>ニックネーム</td>
+        <td>在住地</td>
+        <td>生徒の性別</td>
+        <td>生徒の学年</td>
+        <td>希望時給</td>
+        <td>指導希望科目</td>
+      </tr>
+      <% @students.each do |student| %>
+      <tr>
+        <td><a href="/students/<%= student.id %>"><%= student.nickname %></a></td>
+        <td><%= student.prefecture.prefecture %><%= student.city %></td>
+        <td><%= student.gender.gender %></td>
+        <td><%= student.school_year.school_year %></td>
+        <td><%= student.fee %></td>
+        <td><%= student.subject %></td>
+      </tr>
+      <% end %>
+    </table>
+    <%= link_to "新規登録", "/students/new", method: :get %>
+    <br>
+    <%= paginate(@students) %>

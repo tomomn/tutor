@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>家庭教師の個人契約なら「Ts Reach」</title>
+  <meta content="text/html; charset=UTF-8" />
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<header>
+  <h1 class="grid-6"><a href="/">家庭教師の個人契約なら「Ts Reach」</a></h1>
+  <% if user_signed_in? %>
+    <%= link_to "マイページ", "/users/#{current_user.id}", method: :get %>
+    <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+  <% else %>
+    <%= link_to "ログイン", new_user_session_path, method: :get %>
+    <%= link_to "会員登録", new_user_registration_path, method: :get %>
+  <% end %>
+  <hr>
+</header>
+<!-- devise標準？のフラッシュメッセージ -->
+       <p class="notice"><%= notice %></p>
+       <p class="alert"><%= alert %></p>
+<!-- ここまで -->
+
+<%= yield %>
+
+</body>
+</html>

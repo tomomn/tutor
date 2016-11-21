@@ -1,0 +1,62 @@
+生徒募集掲示板<br><br>
+
+生徒募集の新規案件登録です。入力してね。<br><br>
+
+  <% if user_signed_in? %>
+  <% else %>
+    <p>新規案件登録をするにはログイン（会員登録）が必要です。</p>
+    <%= link_to "ログイン（会員登録）", new_user_session_path, method: :get %>
+  <% end %>
+  <br>
+  <br>
+
+<%= form_for @teacher do |f| %>
+  <table>
+    <tr><td>ニックネーム</td><td><%= f.text_field :nickname, placeholder: "例：T.Y、やまだ" %></td></tr>
+    <tr><td>在住都道府県</td><td><%= f.collection_select(:prefecture_id, @prefecture, :id, :prefecture, :prompt => "選択してください") %></td></tr>
+    <tr><td>在住市区町村</td><td><%= f.text_field :city, placeholder: "例：川崎市中原区" %></td></tr>
+    <tr><td>年齢</td><td><%= f.collection_select(:age_id, @age, :id, :age, :prompt => "選択してください") %></td></tr>
+    <tr><td>性別</td><td><%= f.collection_select(:gender_id, @gender, :id, :gender, :prompt => "選択してください") %></td></tr>
+    <tr><td>在校/出身大学</td><td><%= f.text_field :university, placeholder: "例：慶応義塾大学" %></td></tr>
+    <tr><td>学部</td><td><%= f.text_field :department, placeholder: "例：文学部" %></td></tr>
+    <tr><td>学年</td><td><%= f.collection_select(:univ_year_id, @univ_year, :id, :univ_year, :prompt => "選択してください") %></td></tr>
+    <tr><td>文系理系</td><td><%= f.collection_select(:bun_ri_id, @bun_ri, :id, :bun_ri, :prompt => "選択してください") %></td></tr>
+    <tr><td>出身中学</td><td><%= f.text_field :junior, placeholder: "例：千葉県立千葉中学校" %></td></tr>
+    <tr><td>出身高校</td><td><%= f.text_field :high, placeholder: "例：千葉県立千葉高等学校" %></td></tr>
+    <tr><td>先生自身の中学受験経験</td><td><%= f.collection_select(:junior_exam_id, @junior_exam, :id, :junior_exam, :prompt => "選択してください") %></td></tr>
+    <tr><td>希望時給</td><td><%= f.text_field :fee, placeholder: "例：小学生：2000円、中学生：2500円、高校生3000円" %></td></tr>
+    <tr><td>指導可能科目（小学生）</td><td><%= f.text_field :subject_primary, placeholder: "例：算数、国語、理科、社会" %></td></tr>
+    <tr><td>指導可能科目（中学生）</td><td><%= f.text_field :subject_junior, placeholder: "例：国語、英語、社会" %></td></tr>
+    <tr><td>指導可能科目（高校生）</td><td><%= f.text_field :subject_high, placeholder: "例：英語" %></td></tr>
+    <tr><td>最寄路線及び駅</td><td><%= f.text_field :station, placeholder: "例：東横線　新丸子駅" %></td></tr>
+    <tr><td>使用可能な交通手段</td><td><%= f.text_field :traffic, placeholder: "例：電車、原付" %></td></tr>
+    <tr><td>指導先までの可能な移動時間</td><td><%= f.collection_select(:traffic_time_id, @traffic_time, :id, :traffic_time, :prompt => "選択してください") %></td></tr>
+    <tr><td>家庭教師の指導経験人数</td><td><%= f.collection_select(:tutor_exp_id, @tutor_exp, :id, :tutor_exp, :prompt => "選択してください") %></td></tr>
+    <tr><td>指導した生徒さんの合格実績</td><td><%= f.text_field :pass_result, placeholder: "例：品川女子学院" %></td></tr>
+    <tr><td>塾（個別指導塾含む）での指導経験</td><td><%= f.collection_select(:cram_exp_id, @cram_exp, :id, :cram_exp, :prompt => "選択してください") %></td></tr>
+    <tr><td>指導可能エリア</td><td><%= f.text_field :instruction_area, placeholder: "例：東急東横線沿線" %></td></tr>
+    <tr><td>指導可能な曜日・時間</td><td><%= f.text_field :instruction_week, placeholder: "例：月水金17時以降、土日は要相談" %></td></tr>
+    <tr><td>交通費</td><td><%= f.text_field :traffic_fee, placeholder: "例：実費支給希望" %></td></tr>
+    <tr><td>通勤・通学定期区間</td><td><%= f.text_field :traffic_setion, placeholder: "例：東急東横線：新丸子〜日吉" %></td></tr>
+    <tr><td>得意科目</td><td><%= f.text_field :favorite_subject, placeholder: "例：国語、英語" %></td></tr>
+    <tr><td>趣味・特技</td><td><%= f.text_field :hobby, placeholder: "例：読書、映画観賞" %></td></tr>
+    <tr><td>資格など</td><td><%= f.text_field :qualification, placeholder: "例：TOEIC830点、漢字検定２級" %></td></tr>
+    <tr><td>部活・サークル</td><td><%= f.text_field :club, placeholder: "例：中学校：茶道部、高校：なし" %></td></tr>
+    <tr><td>指導経験</td><td><%= f.text_area :instruction_exp %></td></tr>
+    <tr><td>自己PR</td><td><%= f.text_area :self_introduction %></td></tr>
+  </table>
+
+  <% if user_signed_in? && @teacher_count == 0 %>
+  <%= f.submit "送信" %>
+  <% elsif user_signed_in? && @teacher_count >= 1 %>
+    <p>既に登録済みの案件があります！案件登録できるには、1人1件までです。新規案件登録をする場合は、マイページより登録済み案件を削除してください。</p>
+  <% else %>
+    <p>新規案件登録をするにはログイン（会員登録）が必要です。</p>
+    <%= link_to "ログイン（会員登録）", new_user_session_path, method: :get %>
+  <% end %>
+<% end %>
+<br><br>
+
+
+
+

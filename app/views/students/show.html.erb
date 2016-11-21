@@ -1,0 +1,42 @@
+<h3>先生募集詳細</h3>
+
+    <table>
+      <tr><td>ニックネーム</td><td><%= @students.nickname %></td></tr>
+      <tr><td>在住地</td><td><%= @students.prefecture.prefecture %><%= @students.city %></td></tr>
+      <tr><td>生徒の性別</td><td><%= @students.gender.gender %></td></tr>
+      <tr><td>生徒の学年</td><td><%= @students.school_year.school_year %></td></tr>
+      <tr><td>希望時給</td><td><%= @students.fee %></td></tr>
+      <tr><td>交通費</td><td><%= @students.traffic_fee %></td></tr>
+      <tr><td>指導希望科目</td><td><%= @students.subject %></td></tr>
+      <tr><td>最寄路線及び駅</td><td><%= @students.station %></td></tr>
+      <tr><td>最寄駅からの距離</td><td><%= @students.station_distance %></td></tr>
+      <tr><td>その他通勤について</td><td><%= @students.station_etc %></td></tr>
+      <tr><td>希望授業頻度</td><td><%= @students.instruction_frequency %></td></tr>
+      <tr><td>希望授業時間/回</td><td><%= @students.instruction_hour %></td></tr>
+      <tr><td>授業可能な曜日時</td><td><%= @students.instruction_week %></td></tr>
+      <tr><td>希望受講期間</td><td><%= @students.instruction_term %></td></tr>
+      <tr><td>生徒様の現状成績</td><td><%= @students.purpose %></td></tr>
+      <tr><td>先生への要望など</td><td><%= @students.request %></td></tr>
+    </table>
+<br><br>
+
+  <% if user_signed_in? && @teacher_count >= 1 %>
+    <%= link_to "この親御様に連絡を取る", "/students/#{@students.id}/confirm", method: :get %>
+  <% elsif user_signed_in? && @teacher_count == 0 %>
+    <p>あなたの登録内容が、親御様宛にメールで届きます。<br>
+    連絡を取る前に、ご自身の先生情報を埋めてください。</p>
+    <%= link_to "=>先生情報を登録/編集する", "/users/#{current_user.id}", method: :get %>
+  <% else %>
+    <p>先生に連絡を取るにはログイン（会員登録）が必要です。</p>
+    <%= link_to "ログイン（会員登録）", new_user_session_path, method: :get %>
+  <% end %>
+
+<br><br>
+<h3>■ご利用上の注意</h3>
+〜〜〜〜<br>
+〜〜〜〜〜<br><br><br><br>
+
+
+
+
+

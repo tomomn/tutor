@@ -1,0 +1,34 @@
+生徒募集掲示板トップ。案件一覧表示
+
+    <h3>先生情報</h3>
+    <table>
+      <tr>
+        <td>ニックネーム</td>
+        <td>在住地</td>
+        <td>性別</td>
+        <td>大学</td>
+        <td>学部</td>
+        <td>学年</td>
+        <td>希望時給</td>
+        <td>指導可能科目（小）</td>
+        <td>指導可能科目（中）</td>
+        <td>指導可能科目（高）</td>
+      </tr>
+      <% @teachers.each do |teacher| %>
+      <tr>
+        <td><a href="/teachers/<%= teacher.id %>"><%= teacher.nickname %></a></td>
+        <td><%= teacher.prefecture.prefecture %><%= teacher.city %></td>
+        <td><%= teacher.gender.gender %></td>
+        <td><%= teacher.university %></td>
+        <td><%= teacher.department %></td>
+        <td><%= teacher.univ_year.univ_year %></td>
+        <td><%= teacher.fee %></td>
+        <td><%= teacher.subject_primary %></td>
+        <td><%= teacher.subject_junior %></td>
+        <td><%= teacher.subject_high %></td>
+      </tr>
+      <% end %>
+    </table>
+    <%= link_to "新規登録", "/teachers/new", method: :get %>
+        <br>
+    <%= paginate(@teachers) %>

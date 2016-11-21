@@ -1,0 +1,17 @@
+先生募集掲示板<br><br>
+
+先生募集の情報登録完了しました。
+
+
+
+<% if @student.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@student.errors.count, "error") %> はこの投稿の保存を禁止しています:</h2>
+ 
+    <ul>
+    <% @student.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>

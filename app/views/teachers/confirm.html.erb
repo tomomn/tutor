@@ -1,0 +1,63 @@
+<P><FONT color="red">まだ送信は完了していません</FONT></P>
+
+<h2>連絡内容確認</h2>
+<h3>生徒募集詳細</h3>
+    <table>
+      <tr><td>ニックネーム</td><td><%= @teachers.nickname %></td></tr>
+      <tr><td>在住地</td><td><%= @teachers.prefecture.prefecture %><%= @teachers.city %></td></tr>
+      <tr><td>年齢</td><td><%= @teachers.age.age %></td></tr>
+      <tr><td>性別</td><td><%= @teachers.gender.gender %></td></tr>
+      <tr><td>在校/出身大学</td><td><%= @teachers.university %></td></tr>
+      <tr><td>学部</td><td><%= @teachers.department %></td></tr>
+      <tr><td>学年</td><td><%= @teachers.univ_year.univ_year %></td></tr>
+      <tr><td>文系理系</td><td><%= @teachers.bun_ri.bun_ri %></td></tr>
+      <tr><td>出身中学</td><td><%= @teachers.junior %></td></tr>
+      <tr><td>出身高校</td><td><%= @teachers.high %></td></tr>
+      <tr><td>先生自身の中学受験経験</td><td><%= @teachers.junior_exam.junior_exam %></td></tr>
+      <tr><td>希望時給</td><td><%= @teachers.fee %></td></tr>
+      <tr><td>指導可能科目（小学生）</td><td><%= @teachers.subject_primary %></td></tr>
+      <tr><td>指導可能科目（中学生）</td><td><%= @teachers.subject_junior %></td></tr>
+      <tr><td>指導可能科目（高校生）</td><td><%= @teachers.subject_high %></td></tr>
+      <tr><td>最寄路線及び駅</td><td><%= @teachers.station %></td></tr>
+      <tr><td>使用可能な交通手段</td><td><%= @teachers.traffic %></td></tr>
+      <tr><td>指導先までの可能な移動時間</td><td><%= @teachers.traffic_time.traffic_time %></td></tr>
+      <tr><td>家庭教師の指導経験人数</td><td><%= @teachers.tutor_exp.tutor_exp %></td></tr>
+      <tr><td>指導した生徒さんの合格実績</td><td><%= @teachers.pass_result %></td></tr>
+      <tr><td>塾（個別指導塾含む）での指導経験</td><td><%= @teachers.cram_exp.cram_exp %></td></tr>
+      <tr><td>指導可能エリア</td><td><%= @teachers.instruction_area %></td></tr>
+      <tr><td>指導可能な曜日・時間</td><td><%= @teachers.instruction_week %></td></tr>
+      <tr><td>交通費</td><td><%= @teachers.traffic_fee %></td></tr>
+      <tr><td>通勤・通学定期区間</td><td><%= @teachers.traffic_setion %></td></tr>
+      <tr><td>得意科目</td><td><%= @teachers.favorite_subject %></td></tr>
+      <tr><td>趣味・特技</td><td><%= @teachers.hobby %></td></tr>
+      <tr><td>資格など</td><td><%= @teachers.qualification %></td></tr>
+      <tr><td>部活・サークル</td><td><%= @teachers.club %></td></tr>
+      <tr><td>指導経験</td><td><%= @teachers.instruction_exp %></td></tr>
+      <tr><td>自己PR</td><td><%= @teachers.self_introduction %></td></tr>
+    </table>
+<br><br>
+
+  <% if user_signed_in? && @student_count >= 1 %>
+    <p>あなたの登録内容が、先生宛にメールで届きます。<br>
+    連絡を取る前に、ご自身の生徒情報を埋めてください。</p>
+    <%= link_to "=>生徒情報を登録/編集する", "/users/#{current_user.id}", method: :get %><br><br>
+    <%= link_to "利用規約に同意の上、この先生に連絡を取る", "/teachers/#{@teachers.id}/complete", method: :get %>
+
+  <% elsif user_signed_in? && @student_count == 0 %>
+    <p>あなたの登録内容が、先生宛にメールで届きます。<br>
+    連絡を取る前に、ご自身の生徒情報を埋めてください。</p>
+    <%= link_to "=>生徒情報を登録/編集する", "/users/#{current_user.id}", method: :get %>
+
+  <% else %>
+    <p>先生に連絡を取るにはログイン（会員登録）が必要です。</p>
+    <%= link_to "ログイン（会員登録）", new_user_session_path, method: :get %>
+  <% end %>
+
+
+
+<br><br>
+<h3>■ご利用上の注意</h3>
+「連絡を取る」を押すと、先生宛にメールが自動で送信されます。<br>
+※ご自身の生徒情報や、登録メールアドレスが、先生宛に公開されます。<br>
+先生がもしあなたの情報を気に入られた場合、先生から個別にご連絡があります。<br>
+先生からご連絡があるまで、しばらくお待ちください。<br><br><br>
