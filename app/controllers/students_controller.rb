@@ -34,11 +34,15 @@ class StudentsController < ApplicationController
   end
 
   def create
-    Student.create(create_params)
+    # Student.create(create_params)
+    @student = Student.new(create_params)
 
-
-    if @student.true
+    if @student.save
     else
+    @prefecture = Prefecture.all
+    @gender = Gender.all
+    @school_year = SchoolYear.all
+    @student_count = User.find(current_user.id).students.count if user_signed_in?
       render action: :new
     end
   end
